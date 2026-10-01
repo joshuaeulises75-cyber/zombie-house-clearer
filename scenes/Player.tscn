@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="res://scripts/Player.gd" type="Script" id="1_a5hdj"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_a5hdj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_zyd3q")
+
+[node name="GunPoint" type="Marker2D" parent="."]
+position = Vector2(28, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1_4kmk2")
+
+[sub_resource type="RectangleShape2D" id="1_4kmk2"]
+size = Vector2(30, 60)
+
+[ext_resource type="res://icon.svg" type="Texture2D" id="2_zyd3q"]

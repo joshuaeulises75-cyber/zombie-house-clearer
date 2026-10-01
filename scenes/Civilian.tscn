@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="res://scripts/Civilian.gd" type="Script" id="1_u1t2z"]
+
+[node name="Civilian" type="Area2D"]
+script = ExtResource("1_u1t2z")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_h3r4m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1_6w0d7")
+
+[sub_resource type="RectangleShape2D" id="1_6w0d7"]
+size = Vector2(26, 52)
+
+[ext_resource type="res://icon.svg" type="Texture2D" id="2_h3r4m"]
