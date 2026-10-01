@@ -7,19 +7,22 @@ var weapon_stats = {
 		"damage": 1,
 		"fire_rate": 0.2,
 		"bullet_speed": 600.0,
-		"spread": 0.0
+		"spread": 0.0,
+		"description": "Rápida y precisa"
 	},
 	"Rifle": {
 		"damage": 2,
-		"fire_rate": 0.3,
+		"fire_rate": 0.35,
 		"bullet_speed": 700.0,
-		"spread": 0.05
+		"spread": 0.08,
+		"description": "Poder y precisión"
 	},
 	"Shotgun": {
-		"damage": 3,
-		"fire_rate": 0.5,
-		"bullet_speed": 500.0,
-		"spread": 0.3
+		"damage": 4,
+		"fire_rate": 0.6,
+		"bullet_speed": 450.0,
+		"spread": 0.4,
+		"description": "Máximo daño en cercana"
 	}
 }
 
@@ -39,3 +42,6 @@ func get_bullet_speed(weapon: String) -> float:
 
 func get_spread(weapon: String) -> float:
 	return get_weapon_stats(weapon)["spread"]
+
+func get_description(weapon: String) -> String:
+	return get_weapon_stats(weapon)["description"]

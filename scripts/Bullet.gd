@@ -8,7 +8,7 @@ var damage: int = 1
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
-	visible = true
+	get_tree().create_timer(4.0).timeout.connect(queue_free)
 
 func _process(delta: float) -> void:
 	position += direction * speed * delta

@@ -1,37 +1,33 @@
 [gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scripts/Level1.gd" id="1_c6gzn"]
-[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="2_xv4f4"]
-[ext_resource type="PackedScene" path="res://scenes/VirtualJoystick.tscn" id="3_q5x1a"]
+[ext_resource type="Script" path="res://scripts/Level1.gd" id="1_level"]
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://scenes/VirtualJoystick.tscn" id="3_joystick"]
 
 [node name="Level1" type="Node2D"]
-script = ExtResource("1_c6gzn")
+script = ExtResource("1_level")
 
 [node name="Background" type="ColorRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 1280.0
-offset_bottom = 720.0
-color = Color(0.11, 0.15, 0.22, 1)
+color = Color(0.1, 0.15, 0.22, 1)
 
 [node name="Ground" type="ColorRect" parent="."]
 offset_left = 0.0
 offset_top = 500.0
 offset_right = 1280.0
 offset_bottom = 720.0
-color = Color(0.26, 0.19, 0.12, 1)
+color = Color(0.2, 0.15, 0.1, 1)
 
-[node name="House" type="ColorRect" parent="."]
+[node name="HouseWalls" type="ColorRect" parent="."]
 offset_left = 300.0
 offset_top = 120.0
 offset_right = 980.0
 offset_bottom = 500.0
-color = Color(0.45, 0.3, 0.2, 1)
+color = Color(0.4, 0.25, 0.15, 1)
 
-[node name="Player" parent="." instance=ExtResource("2_xv4f4")]
+[node name="Player" parent="." instance=ExtResource("2_player")]
 position = Vector2(150, 420)
 
 [node name="Zombies" type="Node2D" parent="."]
@@ -45,64 +41,69 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="ScoreLabel" type="Label" parent="UI/HUD"]
 layout_mode = 0
-offset_left = 30.0
-offset_top = 20.0
-offset_right = 220.0
-offset_bottom = 60.0
+offset_left = 20.0
+offset_top = 15.0
+offset_right = 250.0
+offset_bottom = 55.0
 text = "Score: 0"
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color.WHITE
 
 [node name="CoinsLabel" type="Label" parent="UI/HUD"]
 layout_mode = 0
-offset_left = 30.0
-offset_top = 60.0
-offset_right = 220.0
-offset_bottom = 100.0
+offset_left = 20.0
+offset_top = 55.0
+offset_right = 250.0
+offset_bottom = 95.0
 text = "Coins: 0"
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color.YELLOW
 
 [node name="HealthLabel" type="Label" parent="UI/HUD"]
 layout_mode = 0
-offset_left = 30.0
-offset_top = 100.0
-offset_right = 220.0
-offset_bottom = 140.0
+offset_left = 20.0
+offset_top = 95.0
+offset_right = 250.0
+offset_bottom = 135.0
 text = "HP: 100/100"
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color.RED
 
 [node name="WeaponLabel" type="Label" parent="UI/HUD"]
 layout_mode = 0
-offset_left = 30.0
-offset_top = 140.0
-offset_right = 300.0
-offset_bottom = 180.0
+offset_left = 20.0
+offset_top = 135.0
+offset_right = 350.0
+offset_bottom = 175.0
 text = "Arma: Pistol"
 theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color.ORANGE
 
 [node name="AlliesLabel" type="Label" parent="UI/HUD"]
 layout_mode = 0
-offset_left = 1050.0
+offset_left = 1020.0
 offset_top = 20.0
-offset_right = 1250.0
+offset_right = 1260.0
 offset_bottom = 60.0
 text = "Aliados: 0"
 theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color.GREEN
 
 [node name="MissionLabel" type="Label" parent="UI/HUD"]
 layout_mode = 0
-offset_left = 230.0
+offset_left = 300.0
 offset_top = 20.0
 offset_right = 900.0
 offset_bottom = 60.0
 text = "Rescata civiles y limpia la casa"
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color.WHITE
+horizontal_alignment = 1
 
-[node name="VirtualJoystick" parent="UI" instance=ExtResource("3_q5x1a")]
+[node name="VirtualJoystick" parent="UI" instance=ExtResource("3_joystick")]
 position = Vector2(40, 520)
 
 [node name="AimButton" type="Button" parent="UI"]
@@ -116,6 +117,7 @@ offset_top = -150.0
 offset_right = -180.0
 offset_bottom = -90.0
 text = "Apuntar"
+theme_override_font_sizes/font_size = 14
 
 [node name="ShootButton" type="Button" parent="UI"]
 anchors_preset = 3
@@ -128,3 +130,4 @@ offset_top = -150.0
 offset_right = -40.0
 offset_bottom = -90.0
 text = "Disparar"
+theme_override_font_sizes/font_size = 14
