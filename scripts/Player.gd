@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 @export var move_speed: float = 220.0
-@export var fire_rate: float = 0.22
 @export var max_health: int = 100
 
 var health: int = max_health
@@ -13,7 +12,7 @@ var aim_active: bool = false
 var shoot_active: bool = false
 var last_aim_direction: Vector2 = Vector2(0, -1)
 var move_input: float = 0.0
-var touch_move: float = 0.0
+var weapon_system: WeaponSystem
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var gun_point: Marker2D = $GunPoint
@@ -21,6 +20,7 @@ var touch_move: float = 0.0
 var bullet_scene = preload("res://scenes/Bullet.tscn")
 
 func _ready() -> void:
+	health = max_health
 	if aim_button:
 		aim_button.button_down.connect(func(): aim_active = true)
 		aim_button.button_up.connect(func(): aim_active = false)
@@ -63,7 +63,7 @@ func _physics_process(delta: float) -> void:
 
 	if (shoot_active or Input.is_physical_key_pressed(KEY_SPACE)) and fire_timer <= 0.0:
 		shoot()
-		fire_timer = fire_rate
+		fire_timer = _get_fire_rate()
 
 func register_joystick(value: Control) -> void:
 	joystick = value
@@ -74,11 +74,23 @@ func set_aim_button(button: Button) -> void:
 func set_shoot_button(button: Button) -> void:
 	shoot_button = button
 
+func set_weapon_system(ws: WeaponSystem) -> void:
+	weapon_system = ws
+
 func shoot() -> void:
+	var current_weapon = GameData.current_weapon
+	var spread = weapon_system.get_spread(current_weapon)
+	var spread_angle = randf_range(-spread, spread)
+	
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = gun_point.global_position
-	bullet.direction = last_aim_direction
+	bullet.direction = last_aim_direction.rotated(spread_angle)
+	bullet.damage = weapon_system.get_damage(current_weapon)
+	bullet.speed = weapon_system.get_bullet_speed(current_weapon)
 	get_tree().current_scene.add_child(bullet)
+
+func _get_fire_rate() -> float:
+	return weapon_system.get_fire_rate(GameData.current_weapon)
 
 func take_damage(amount: int) -> void:
 	health -= amount
